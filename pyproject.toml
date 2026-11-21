@@ -35,6 +35,10 @@ mlops = [
     "mlflow>=2.14",
     "dvc>=3.50",
 ]
+# Recording the README demo GIF (uses the installed Microsoft Edge; not needed in CI).
+demo = [
+    "playwright>=1.45",
+]
 dev = [
     "pytest>=8.0",
     "ruff>=0.5",

@@ -61,3 +61,29 @@ def test_results_table_uses_measured_json(report_module, tmp_path: Path) -> None
     table = report_module.accuracy_table()
     assert "| bottle | 98.8 | 95.1 | 90.3 |" in table
     assert "| bottle | 10 (6) | 100.0 | 50.0 | 0.0 |" in report_module.threshold_table()
+
+
+def _script(name: str):
+    spec = importlib.util.spec_from_file_location(name, ROOT / "scripts" / f"{name}.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)  # type: ignore[union-attr]
+    return module
+
+
+def test_replace_blocks_only_touches_marked_sections() -> None:
+    m = _script("make_results_table")
+    text = "intro\n<!-- A:START -->\nold\n<!-- A:END -->\nmiddle\n<!-- B:START -->x<!-- B:END -->"
+    out = m.replace_blocks(text, {"A": "new\n", "C": "unused\n"})
+    assert out.startswith("intro\n<!-- A:START -->\nnew\n<!-- A:END -->\nmiddle")
+    assert "old" not in out and "<!-- B:START -->x<!-- B:END -->" in out
+
+
+def test_demo_gif_merges_identical_frames(tmp_path: Path) -> None:
+    from PIL import Image
+
+    m = _script("record_demo")
+    red, blue = Image.new("RGB", (40, 30), "red"), Image.new("RGB", (40, 30), "blue")
+    frames = [(red, 0.0), (red.copy(), 0.1), (blue, 0.2), (blue.copy(), 0.3)]
+    size = m.to_gif(frames, tmp_path / "demo.gif", width=20)
+    gif = Image.open(tmp_path / "demo.gif")
+    assert size > 0 and gif.size == (20, 15) and gif.n_frames == 2
