@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-test:
+    name: ruff + pytest
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install (CPU-only torch, no MLflow/DVC needed for tests)
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[ml,dev]"
+      - name: Ruff
+        run: ruff check . && ruff format --check .
+      - name: Pytest (synthetic data, no MVTec download)
+        run: pytest
+
+  docker:
+    name: docker build + smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build serving image
+        run: docker build -t anomaly-mlops:ci .
+      - name: Start container (no models mounted) and check /api/health
+        run: |
+          docker run -d --name api -p 8000:8000 anomaly-mlops:ci
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8000/api/health; then exit 0; fi
+            sleep 2
+          done
+          docker logs api
+          exit 1
+      - name: Check the image has no torch
+        run: docker run --rm anomaly-mlops:ci python -c "import importlib.util as u, sys; sys.exit(u.find_spec('torch') is not None)"

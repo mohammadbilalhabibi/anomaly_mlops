@@ -1,0 +1,16 @@
+{
+  "category": "bottle",
+  "backend": "int8",
+  "n_test": 83,
+  "n_defect": 63,
+  "image_auroc": 1.0,
+  "pixel_auroc": 0.7696876643840915,
+  "aupro": 0.325644737176238,
+  "pro_fpr_limit": 0.3,
+  "threshold": 0.9502646923065186,
+  "precision_at_threshold": 0.984375,
+  "recall_at_threshold": 1.0,
+  "false_positive_rate_at_threshold": 0.05,
+  "eval_seconds": 17.5,
+  "pixel_metric_resolution": 224
+}

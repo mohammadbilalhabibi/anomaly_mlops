@@ -1,0 +1,16 @@
+{
+  "category": "transistor",
+  "backend": "torch",
+  "n_test": 100,
+  "n_defect": 40,
+  "image_auroc": 1.0,
+  "pixel_auroc": 0.9751865354769734,
+  "aupro": 0.9484087017752917,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.15109121799469,
+  "precision_at_threshold": 0.9302325581395349,
+  "recall_at_threshold": 1.0,
+  "false_positive_rate_at_threshold": 0.05,
+  "eval_seconds": 36.85,
+  "pixel_metric_resolution": 224
+}

@@ -1,0 +1,25 @@
+{
+  "category": "toothbrush",
+  "backend": "fp32",
+  "n_test": 42,
+  "n_defect": 30,
+  "image_auroc": 0.9916666666666667,
+  "pixel_auroc": 0.986619104045909,
+  "aupro": 0.8724870798263492,
+  "pro_fpr_limit": 0.3,
+  "threshold": 0.9861215353012085,
+  "precision_at_threshold": 0.9354838709677419,
+  "recall_at_threshold": 0.9666666666666667,
+  "false_positive_rate_at_threshold": 0.16666666666666666,
+  "eval_seconds": 8.69,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": 0.0,
+      "pixel_auroc": 2.6578472756000338e-09,
+      "aupro": -1.1096904917184958e-07
+    }
+  }
+}

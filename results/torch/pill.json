@@ -1,0 +1,16 @@
+{
+  "category": "pill",
+  "backend": "torch",
+  "n_test": 167,
+  "n_defect": 141,
+  "image_auroc": 0.9421713038734315,
+  "pixel_auroc": 0.9762071676930844,
+  "aupro": 0.9130015869781221,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.2302006483078003,
+  "precision_at_threshold": 1.0,
+  "recall_at_threshold": 0.574468085106383,
+  "false_positive_rate_at_threshold": 0.0,
+  "eval_seconds": 59.76,
+  "pixel_metric_resolution": 224
+}

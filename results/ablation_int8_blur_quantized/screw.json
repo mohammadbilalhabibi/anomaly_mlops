@@ -1,0 +1,16 @@
+{
+  "category": "screw",
+  "backend": "int8",
+  "n_test": 160,
+  "n_defect": 119,
+  "image_auroc": 0.9514244722279155,
+  "pixel_auroc": 0.8554590586760611,
+  "aupro": 0.5127060636773978,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.0311558246612549,
+  "precision_at_threshold": 0.9855072463768116,
+  "recall_at_threshold": 0.5714285714285714,
+  "false_positive_rate_at_threshold": 0.024390243902439025,
+  "eval_seconds": 52.7,
+  "pixel_metric_resolution": 224
+}

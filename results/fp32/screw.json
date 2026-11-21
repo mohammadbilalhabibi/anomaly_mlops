@@ -1,0 +1,25 @@
+{
+  "category": "screw",
+  "backend": "fp32",
+  "n_test": 160,
+  "n_defect": 119,
+  "image_auroc": 0.95224431235909,
+  "pixel_auroc": 0.98844047733416,
+  "aupro": 0.9296626356800202,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.0311558246612549,
+  "precision_at_threshold": 0.9846153846153847,
+  "recall_at_threshold": 0.5378151260504201,
+  "false_positive_rate_at_threshold": 0.024390243902439025,
+  "eval_seconds": 53.79,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": 0.0,
+      "pixel_auroc": -3.6095997302254546e-08,
+      "aupro": -2.9760919140198183e-07
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "category": "grid",
+  "backend": "int8",
+  "n_test": 78,
+  "n_defect": 57,
+  "image_auroc": 0.9841269841269841,
+  "pixel_auroc": 0.975680589582296,
+  "aupro": 0.8901536247025018,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.0159471035003662,
+  "precision_at_threshold": 0.9818181818181818,
+  "recall_at_threshold": 0.9473684210526315,
+  "false_positive_rate_at_threshold": 0.047619047619047616,
+  "eval_seconds": 18.05,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": 1.1102230246251565e-16,
+      "pixel_auroc": 0.000886246921157241,
+      "aupro": 0.00395346610057612
+    }
+  }
+}

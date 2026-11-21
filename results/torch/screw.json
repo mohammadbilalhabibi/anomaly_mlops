@@ -1,0 +1,16 @@
+{
+  "category": "screw",
+  "backend": "torch",
+  "n_test": 160,
+  "n_defect": 119,
+  "image_auroc": 0.95224431235909,
+  "pixel_auroc": 0.9884404412381627,
+  "aupro": 0.9296623380708288,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.0311558246612549,
+  "precision_at_threshold": 0.9846153846153847,
+  "recall_at_threshold": 0.5378151260504201,
+  "false_positive_rate_at_threshold": 0.024390243902439025,
+  "eval_seconds": 64.83,
+  "pixel_metric_resolution": 224
+}

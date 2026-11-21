@@ -1,0 +1,6 @@
+outs:
+- md5: c85e6ebbfaa2feed267ed6068218844d.dir
+  size: 403195203
+  nfiles: 355
+  hash: md5
+  path: transistor

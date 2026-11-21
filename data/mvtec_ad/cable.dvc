@@ -1,0 +1,6 @@
+outs:
+- md5: fe503df707fff5bea0b7bbb5872a1c16.dir
+  size: 505197025
+  nfiles: 468
+  hash: md5
+  path: cable

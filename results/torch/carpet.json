@@ -1,0 +1,16 @@
+{
+  "category": "carpet",
+  "backend": "torch",
+  "n_test": 117,
+  "n_defect": 89,
+  "image_auroc": 0.9911717495987159,
+  "pixel_auroc": 0.9881679995785715,
+  "aupro": 0.918821709416825,
+  "pro_fpr_limit": 0.3,
+  "threshold": 0.9148325324058533,
+  "precision_at_threshold": 0.9072164948453608,
+  "recall_at_threshold": 0.9887640449438202,
+  "false_positive_rate_at_threshold": 0.32142857142857145,
+  "eval_seconds": 46.83,
+  "pixel_metric_resolution": 224
+}

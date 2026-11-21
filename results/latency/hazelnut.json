@@ -1,0 +1,32 @@
+{
+  "category": "hazelnut",
+  "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+  "logical_cores": 8,
+  "torch_threads": 8,
+  "torch_version": "2.15.0+cpu",
+  "onnxruntime_version": "1.32.0",
+  "batch_size": 1,
+  "runs": 50,
+  "warmup": 5,
+  "memory_bank_size": 27597,
+  "preprocess": {
+    "median_ms": 30.34,
+    "p95_ms": 34.38,
+    "mean_ms": 30.92
+  },
+  "torch": {
+    "median_ms": 373.81,
+    "p95_ms": 457.08,
+    "mean_ms": 388.29
+  },
+  "onnx_fp32": {
+    "median_ms": 299.26,
+    "p95_ms": 395.31,
+    "mean_ms": 310.5
+  },
+  "onnx_int8": {
+    "median_ms": 259.31,
+    "p95_ms": 331.51,
+    "mean_ms": 264.26
+  }
+}

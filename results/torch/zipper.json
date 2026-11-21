@@ -1,0 +1,16 @@
+{
+  "category": "zipper",
+  "backend": "torch",
+  "n_test": 151,
+  "n_defect": 119,
+  "image_auroc": 0.9950105042016807,
+  "pixel_auroc": 0.9827421181287981,
+  "aupro": 0.9278654326096166,
+  "pro_fpr_limit": 0.3,
+  "threshold": 0.8661351799964905,
+  "precision_at_threshold": 0.9914529914529915,
+  "recall_at_threshold": 0.9747899159663865,
+  "false_positive_rate_at_threshold": 0.03125,
+  "eval_seconds": 51.52,
+  "pixel_metric_resolution": 224
+}

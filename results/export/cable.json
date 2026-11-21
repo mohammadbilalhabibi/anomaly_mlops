@@ -1,0 +1,16 @@
+{
+  "category": "cable",
+  "n_parity_images": 16,
+  "fp32": {
+    "file_mb": 170.9,
+    "max_abs_score_diff": 2.5033950805664062e-06,
+    "max_rel_score_diff": 1.616491658751329e-06,
+    "max_abs_map_diff": 4.351139068603516e-06
+  },
+  "int8": {
+    "file_mb": 96.7,
+    "max_abs_score_diff": 0.08004987239837646,
+    "max_rel_score_diff": 0.039956849068403244,
+    "max_abs_map_diff": 0.10943543910980225
+  }
+}

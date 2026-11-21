@@ -1,0 +1,25 @@
+{
+  "category": "leather",
+  "backend": "int8",
+  "n_test": 124,
+  "n_defect": 92,
+  "image_auroc": 1.0,
+  "pixel_auroc": 0.9905748198556737,
+  "aupro": 0.9572507825811185,
+  "pro_fpr_limit": 0.3,
+  "threshold": 0.8538671731948853,
+  "precision_at_threshold": 0.9484536082474226,
+  "recall_at_threshold": 1.0,
+  "false_positive_rate_at_threshold": 0.15625,
+  "eval_seconds": 28.63,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": 0.0,
+      "pixel_auroc": -0.0003678790751305838,
+      "aupro": 0.00048288108330374335
+    }
+  }
+}

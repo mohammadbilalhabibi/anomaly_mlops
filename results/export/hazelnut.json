@@ -1,0 +1,16 @@
+{
+  "category": "hazelnut",
+  "n_parity_images": 16,
+  "fp32": {
+    "file_mb": 219.1,
+    "max_abs_score_diff": 2.6226043701171875e-06,
+    "max_rel_score_diff": 2.0875695554423146e-06,
+    "max_abs_map_diff": 4.708766937255859e-06
+  },
+  "int8": {
+    "file_mb": 145.0,
+    "max_abs_score_diff": 0.1826937198638916,
+    "max_rel_score_diff": 0.08175100386142731,
+    "max_abs_map_diff": 0.2052229642868042
+  }
+}

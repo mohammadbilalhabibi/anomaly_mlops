@@ -1,0 +1,16 @@
+{
+  "category": "capsule",
+  "n_parity_images": 16,
+  "fp32": {
+    "file_mb": 169.3,
+    "max_abs_score_diff": 6.198883056640625e-06,
+    "max_rel_score_diff": 1.0058376574306749e-05,
+    "max_abs_map_diff": 1.004338264465332e-05
+  },
+  "int8": {
+    "file_mb": 95.1,
+    "max_abs_score_diff": 0.12684208154678345,
+    "max_rel_score_diff": 0.20164279639720917,
+    "max_abs_map_diff": 0.15492913126945496
+  }
+}

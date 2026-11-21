@@ -1,0 +1,16 @@
+{
+  "category": "cable",
+  "backend": "torch",
+  "n_test": 150,
+  "n_defect": 92,
+  "image_auroc": 0.9958770614692654,
+  "pixel_auroc": 0.9857097062996508,
+  "aupro": 0.9327730376554529,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.4170163869857788,
+  "precision_at_threshold": 0.9886363636363636,
+  "recall_at_threshold": 0.9456521739130435,
+  "false_positive_rate_at_threshold": 0.017241379310344827,
+  "eval_seconds": 54.8,
+  "pixel_metric_resolution": 224
+}

@@ -1,0 +1,25 @@
+{
+  "category": "hazelnut",
+  "backend": "fp32",
+  "n_test": 110,
+  "n_defect": 70,
+  "image_auroc": 1.0,
+  "pixel_auroc": 0.983756813864217,
+  "aupro": 0.8630678411772774,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.4546358585357666,
+  "precision_at_threshold": 1.0,
+  "recall_at_threshold": 1.0,
+  "false_positive_rate_at_threshold": 0.0,
+  "eval_seconds": 46.27,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": 0.0,
+      "pixel_auroc": 5.861662266681833e-10,
+      "aupro": 1.083750674757411e-07
+    }
+  }
+}

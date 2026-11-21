@@ -1,0 +1,16 @@
+{
+  "category": "bottle",
+  "n_parity_images": 16,
+  "fp32": {
+    "file_mb": 166.4,
+    "max_abs_score_diff": 1.9073486328125e-06,
+    "max_rel_score_diff": 2.6088553113368107e-06,
+    "max_abs_map_diff": 2.1576881408691406e-05
+  },
+  "int8": {
+    "file_mb": 92.2,
+    "max_abs_score_diff": 0.059448182582855225,
+    "max_rel_score_diff": 0.08131272345781326,
+    "max_abs_map_diff": 0.3170017600059509
+  }
+}

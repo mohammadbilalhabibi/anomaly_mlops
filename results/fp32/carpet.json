@@ -1,0 +1,25 @@
+{
+  "category": "carpet",
+  "backend": "fp32",
+  "n_test": 117,
+  "n_defect": 89,
+  "image_auroc": 0.9911717495987159,
+  "pixel_auroc": 0.9881679999596575,
+  "aupro": 0.9188217695771728,
+  "pro_fpr_limit": 0.3,
+  "threshold": 0.9148325324058533,
+  "precision_at_threshold": 0.9072164948453608,
+  "recall_at_threshold": 0.9887640449438202,
+  "false_positive_rate_at_threshold": 0.32142857142857145,
+  "eval_seconds": 36.23,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": 0.0,
+      "pixel_auroc": -3.810860516040293e-10,
+      "aupro": -6.016034781453072e-08
+    }
+  }
+}

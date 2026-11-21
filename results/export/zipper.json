@@ -1,0 +1,16 @@
+{
+  "category": "zipper",
+  "n_parity_images": 16,
+  "fp32": {
+    "file_mb": 175.4,
+    "max_abs_score_diff": 3.933906555175781e-06,
+    "max_rel_score_diff": 5.007339950680034e-06,
+    "max_abs_map_diff": 8.374452590942383e-06
+  },
+  "int8": {
+    "file_mb": 101.2,
+    "max_abs_score_diff": 0.02860236167907715,
+    "max_rel_score_diff": 0.028546389192342758,
+    "max_abs_map_diff": 0.06113898754119873
+  }
+}

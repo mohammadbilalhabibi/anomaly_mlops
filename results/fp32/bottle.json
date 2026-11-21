@@ -1,0 +1,25 @@
+{
+  "category": "bottle",
+  "backend": "fp32",
+  "n_test": 83,
+  "n_defect": 63,
+  "image_auroc": 1.0,
+  "pixel_auroc": 0.9832984569439968,
+  "aupro": 0.9253691049951683,
+  "pro_fpr_limit": 0.3,
+  "threshold": 0.9502646923065186,
+  "precision_at_threshold": 0.984375,
+  "recall_at_threshold": 1.0,
+  "false_positive_rate_at_threshold": 0.05,
+  "eval_seconds": 23.41,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": 0.0,
+      "pixel_auroc": -8.914180504859814e-11,
+      "aupro": 1.2471541022129884e-08
+    }
+  }
+}

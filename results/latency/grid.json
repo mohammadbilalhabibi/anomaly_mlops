@@ -1,0 +1,32 @@
+{
+  "category": "grid",
+  "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+  "logical_cores": 8,
+  "torch_threads": 8,
+  "torch_version": "2.15.0+cpu",
+  "onnxruntime_version": "1.32.0",
+  "batch_size": 1,
+  "runs": 50,
+  "warmup": 5,
+  "memory_bank_size": 18660,
+  "preprocess": {
+    "median_ms": 16.17,
+    "p95_ms": 19.08,
+    "mean_ms": 16.39
+  },
+  "torch": {
+    "median_ms": 315.68,
+    "p95_ms": 397.72,
+    "mean_ms": 327.15
+  },
+  "onnx_fp32": {
+    "median_ms": 228.97,
+    "p95_ms": 277.47,
+    "mean_ms": 233.49
+  },
+  "onnx_int8": {
+    "median_ms": 184.08,
+    "p95_ms": 207.5,
+    "mean_ms": 185.32
+  }
+}

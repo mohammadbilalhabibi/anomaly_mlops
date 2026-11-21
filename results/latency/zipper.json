@@ -1,0 +1,32 @@
+{
+  "category": "zipper",
+  "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+  "logical_cores": 8,
+  "torch_threads": 8,
+  "torch_version": "2.15.0+cpu",
+  "onnxruntime_version": "1.32.0",
+  "batch_size": 1,
+  "runs": 50,
+  "warmup": 5,
+  "memory_bank_size": 16935,
+  "preprocess": {
+    "median_ms": 14.75,
+    "p95_ms": 17.49,
+    "mean_ms": 15.24
+  },
+  "torch": {
+    "median_ms": 275.13,
+    "p95_ms": 311.86,
+    "mean_ms": 280.1
+  },
+  "onnx_fp32": {
+    "median_ms": 216.07,
+    "p95_ms": 260.33,
+    "mean_ms": 222.14
+  },
+  "onnx_int8": {
+    "median_ms": 171.61,
+    "p95_ms": 219.3,
+    "mean_ms": 177.24
+  }
+}

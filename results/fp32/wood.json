@@ -1,0 +1,25 @@
+{
+  "category": "wood",
+  "backend": "fp32",
+  "n_test": 79,
+  "n_defect": 60,
+  "image_auroc": 0.992982456140351,
+  "pixel_auroc": 0.9372467630610462,
+  "aupro": 0.8345583144705193,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.0579208135604858,
+  "precision_at_threshold": 0.8695652173913043,
+  "recall_at_threshold": 1.0,
+  "false_positive_rate_at_threshold": 0.47368421052631576,
+  "eval_seconds": 25.74,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": 0.0,
+      "pixel_auroc": 6.536434726811535e-10,
+      "aupro": -1.052846676508068e-08
+    }
+  }
+}

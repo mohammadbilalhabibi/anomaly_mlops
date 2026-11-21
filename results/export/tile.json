@@ -1,0 +1,16 @@
+{
+  "category": "tile",
+  "n_parity_images": 16,
+  "fp32": {
+    "file_mb": 172.5,
+    "max_abs_score_diff": 1.6689300537109375e-06,
+    "max_rel_score_diff": 1.4015089391250513e-06,
+    "max_abs_map_diff": 5.185604095458984e-06
+  },
+  "int8": {
+    "file_mb": 98.4,
+    "max_abs_score_diff": 0.05376541614532471,
+    "max_rel_score_diff": 0.0300756823271513,
+    "max_abs_map_diff": 0.07132303714752197
+  }
+}

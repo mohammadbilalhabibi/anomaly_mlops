@@ -1,0 +1,16 @@
+{
+  "category": "metal_nut",
+  "backend": "int8",
+  "n_test": 115,
+  "n_defect": 93,
+  "image_auroc": 0.9965786901270772,
+  "pixel_auroc": 0.8278795528992257,
+  "aupro": 0.43560014036496697,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.2342597246170044,
+  "precision_at_threshold": 0.9789473684210527,
+  "recall_at_threshold": 1.0,
+  "false_positive_rate_at_threshold": 0.09090909090909091,
+  "eval_seconds": 23.49,
+  "pixel_metric_resolution": 224
+}

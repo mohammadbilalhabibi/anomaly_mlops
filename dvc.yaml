@@ -1,0 +1,86 @@
+# Reproducible pipeline: `dvc repro` re-runs only stages whose code, data or params changed.
+# Data: one .dvc file per category (data/mvtec_ad/<category>.dvc), added with `dvc add`.
+stages:
+  verify_data:
+    cmd: python scripts/verify_data.py
+    deps:
+      - scripts/verify_data.py
+      - src/anomaly/data.py
+    params:
+      - data
+    metrics:
+      - results/data_report.json:
+          cache: false
+
+  train:
+    foreach: ${data.categories}
+    do:
+      cmd: python scripts/train.py --category ${item}
+      deps:
+        - data/mvtec_ad/${item}
+        - scripts/train.py
+        - src/anomaly/coreset.py
+        - src/anomaly/model.py
+        - src/anomaly/patchcore.py
+        - src/anomaly/preprocess.py
+      params:
+        - preprocess
+        - model
+        - train
+      outs:
+        - models/${item}/patchcore.pt
+        - models/${item}/meta.json
+
+  export:
+    foreach: ${data.categories}
+    do:
+      cmd: python scripts/export_onnx.py --category ${item}
+      deps:
+        - models/${item}/patchcore.pt
+        - models/${item}/meta.json
+        - scripts/export_onnx.py
+        - src/anomaly/export.py
+      outs:
+        - models/${item}/model_fp32.onnx
+        - models/${item}/model_int8.onnx
+      metrics:
+        - results/export/${item}.json:
+            cache: false
+
+  evaluate:
+    foreach: ${data.categories}
+    do:
+      cmd: python scripts/evaluate.py --category ${item}
+      deps:
+        - data/mvtec_ad/${item}
+        - models/${item}/patchcore.pt
+        - models/${item}/meta.json
+        - models/${item}/model_fp32.onnx
+        - models/${item}/model_int8.onnx
+        - scripts/evaluate.py
+        - src/anomaly/metrics.py
+      params:
+        - evaluate
+      metrics:
+        - results/torch/${item}.json:
+            cache: false
+        - results/fp32/${item}.json:
+            cache: false
+        - results/int8/${item}.json:
+            cache: false
+
+  benchmark:
+    foreach: ${data.categories}
+    do:
+      cmd: python scripts/benchmark.py --category ${item}
+      deps:
+        - models/${item}/patchcore.pt
+        - models/${item}/model_fp32.onnx
+        - models/${item}/model_int8.onnx
+        - scripts/benchmark.py
+        - src/anomaly/onnx_infer.py
+      params:
+        - benchmark
+      metrics:
+        - results/latency/${item}.json:
+            cache: false

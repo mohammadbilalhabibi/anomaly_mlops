@@ -1,0 +1,25 @@
+{
+  "category": "capsule",
+  "backend": "int8",
+  "n_test": 132,
+  "n_defect": 109,
+  "image_auroc": 0.9529317909852413,
+  "pixel_auroc": 0.9860838439534447,
+  "aupro": 0.9034905450431004,
+  "pro_fpr_limit": 0.3,
+  "threshold": 0.9688999652862549,
+  "precision_at_threshold": 0.9859154929577465,
+  "recall_at_threshold": 0.6422018348623854,
+  "false_positive_rate_at_threshold": 0.043478260869565216,
+  "eval_seconds": 29.93,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": 0.005185480654168462,
+      "pixel_auroc": 0.000750140947444633,
+      "aupro": 0.007574822726598929
+    }
+  }
+}

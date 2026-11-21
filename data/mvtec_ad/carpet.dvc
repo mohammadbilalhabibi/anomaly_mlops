@@ -1,0 +1,6 @@
+outs:
+- md5: e48760c3017987f97d51cf7b435434cd.dir
+  size: 740943525
+  nfiles: 488
+  hash: md5
+  path: carpet

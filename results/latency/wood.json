@@ -1,0 +1,32 @@
+{
+  "category": "wood",
+  "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+  "logical_cores": 8,
+  "torch_threads": 8,
+  "torch_version": "2.15.0+cpu",
+  "onnxruntime_version": "1.32.0",
+  "batch_size": 1,
+  "runs": 50,
+  "warmup": 5,
+  "memory_bank_size": 17405,
+  "preprocess": {
+    "median_ms": 39.04,
+    "p95_ms": 43.76,
+    "mean_ms": 39.07
+  },
+  "torch": {
+    "median_ms": 298.7,
+    "p95_ms": 322.7,
+    "mean_ms": 298.2
+  },
+  "onnx_fp32": {
+    "median_ms": 216.9,
+    "p95_ms": 267.42,
+    "mean_ms": 223.09
+  },
+  "onnx_int8": {
+    "median_ms": 172.95,
+    "p95_ms": 198.31,
+    "mean_ms": 173.6
+  }
+}

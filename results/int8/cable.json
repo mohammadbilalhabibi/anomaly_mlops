@@ -1,0 +1,25 @@
+{
+  "category": "cable",
+  "backend": "int8",
+  "n_test": 150,
+  "n_defect": 92,
+  "image_auroc": 0.9956896551724137,
+  "pixel_auroc": 0.9854620159291287,
+  "aupro": 0.9323740898188414,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.4170163869857788,
+  "precision_at_threshold": 0.9777777777777777,
+  "recall_at_threshold": 0.9565217391304348,
+  "false_positive_rate_at_threshold": 0.034482758620689655,
+  "eval_seconds": 34.85,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": 0.00018740629685165544,
+      "pixel_auroc": 0.0002476903705220801,
+      "aupro": 0.00039894783661154065
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "category": "screw",
+  "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+  "logical_cores": 8,
+  "torch_threads": 8,
+  "torch_version": "2.15.0+cpu",
+  "onnxruntime_version": "1.32.0",
+  "batch_size": 1,
+  "runs": 50,
+  "warmup": 5,
+  "memory_bank_size": 22580,
+  "preprocess": {
+    "median_ms": 16.27,
+    "p95_ms": 20.19,
+    "mean_ms": 17.01
+  },
+  "torch": {
+    "median_ms": 382.83,
+    "p95_ms": 575.44,
+    "mean_ms": 409.38
+  },
+  "onnx_fp32": {
+    "median_ms": 257.5,
+    "p95_ms": 307.36,
+    "mean_ms": 264.22
+  },
+  "onnx_int8": {
+    "median_ms": 207.78,
+    "p95_ms": 230.06,
+    "mean_ms": 208.2
+  }
+}

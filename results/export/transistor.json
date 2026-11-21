@@ -1,0 +1,16 @@
+{
+  "category": "transistor",
+  "n_parity_images": 16,
+  "fp32": {
+    "file_mb": 167.7,
+    "max_abs_score_diff": 2.7418136596679688e-06,
+    "max_rel_score_diff": 2.7550090635486413e-06,
+    "max_abs_map_diff": 6.198883056640625e-06
+  },
+  "int8": {
+    "file_mb": 93.5,
+    "max_abs_score_diff": 0.03881263732910156,
+    "max_rel_score_diff": 0.025845250114798546,
+    "max_abs_map_diff": 0.15781551599502563
+  }
+}

@@ -1,0 +1,6 @@
+outs:
+- md5: acb43dbb21e7518dc447cc22e9a47035.dir
+  size: 161398735
+  nfiles: 401
+  hash: md5
+  path: grid

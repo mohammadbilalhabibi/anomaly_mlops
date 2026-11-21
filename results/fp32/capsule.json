@@ -1,0 +1,25 @@
+{
+  "category": "capsule",
+  "backend": "fp32",
+  "n_test": 132,
+  "n_defect": 109,
+  "image_auroc": 0.9581172716394097,
+  "pixel_auroc": 0.986833987427296,
+  "aupro": 0.9110655708049409,
+  "pro_fpr_limit": 0.3,
+  "threshold": 0.9688999652862549,
+  "precision_at_threshold": 0.9855072463768116,
+  "recall_at_threshold": 0.6238532110091743,
+  "false_positive_rate_at_threshold": 0.043478260869565216,
+  "eval_seconds": 37.34,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": 0.0,
+      "pixel_auroc": -2.526406639447032e-09,
+      "aupro": -2.030352415083314e-07
+    }
+  }
+}

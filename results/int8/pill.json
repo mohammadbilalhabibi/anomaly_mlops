@@ -1,0 +1,25 @@
+{
+  "category": "pill",
+  "backend": "int8",
+  "n_test": 167,
+  "n_defect": 141,
+  "image_auroc": 0.944353518821604,
+  "pixel_auroc": 0.9755479791089,
+  "aupro": 0.9115700383367369,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.2302006483078003,
+  "precision_at_threshold": 1.0,
+  "recall_at_threshold": 0.5886524822695035,
+  "false_positive_rate_at_threshold": 0.0,
+  "eval_seconds": 38.37,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": -0.0021822149481725006,
+      "pixel_auroc": 0.0006591885841843448,
+      "aupro": 0.001431548641385172
+    }
+  }
+}

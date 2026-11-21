@@ -1,0 +1,6 @@
+outs:
+- md5: 621caead0b5a184b2d57eea9928db89b.dir
+  size: 275077521
+  nfiles: 577
+  hash: md5
+  path: pill

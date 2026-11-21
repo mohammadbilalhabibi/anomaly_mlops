@@ -1,0 +1,16 @@
+{
+  "category": "grid",
+  "backend": "torch",
+  "n_test": 78,
+  "n_defect": 57,
+  "image_auroc": 0.9841269841269842,
+  "pixel_auroc": 0.9765668365034532,
+  "aupro": 0.8941070908030779,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.0159471035003662,
+  "precision_at_threshold": 0.9818181818181818,
+  "recall_at_threshold": 0.9473684210526315,
+  "false_positive_rate_at_threshold": 0.047619047619047616,
+  "eval_seconds": 29.27,
+  "pixel_metric_resolution": 224
+}

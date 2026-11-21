@@ -1,0 +1,7 @@
+{
+  "category": "bottle",
+  "variant": "int8",
+  "runs": 50,
+  "median_ms": 214.15,
+  "p95_ms": 255.22
+}

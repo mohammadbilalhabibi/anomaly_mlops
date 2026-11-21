@@ -1,0 +1,6 @@
+outs:
+- md5: f3c0f1887a452b0b4ea967567be8969c.dir
+  size: 165862477
+  nfiles: 430
+  hash: md5
+  path: metal_nut

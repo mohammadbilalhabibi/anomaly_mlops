@@ -1,0 +1,16 @@
+{
+  "category": "pill",
+  "n_parity_images": 16,
+  "fp32": {
+    "file_mb": 183.1,
+    "max_abs_score_diff": 2.9802322387695312e-06,
+    "max_rel_score_diff": 2.5133342660410563e-06,
+    "max_abs_map_diff": 1.0222196578979492e-05
+  },
+  "int8": {
+    "file_mb": 109.0,
+    "max_abs_score_diff": 0.028285622596740723,
+    "max_rel_score_diff": 0.02368120290338993,
+    "max_abs_map_diff": 0.2085321545600891
+  }
+}

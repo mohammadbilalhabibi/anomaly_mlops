@@ -1,0 +1,16 @@
+{
+  "category": "grid",
+  "n_parity_images": 16,
+  "fp32": {
+    "file_mb": 182.5,
+    "max_abs_score_diff": 5.304813385009766e-06,
+    "max_rel_score_diff": 6.5349795477231964e-06,
+    "max_abs_map_diff": 8.851289749145508e-06
+  },
+  "int8": {
+    "file_mb": 108.3,
+    "max_abs_score_diff": 0.013380289077758789,
+    "max_rel_score_diff": 0.00967430043965578,
+    "max_abs_map_diff": 0.03972601890563965
+  }
+}

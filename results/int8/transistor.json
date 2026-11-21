@@ -1,0 +1,25 @@
+{
+  "category": "transistor",
+  "backend": "int8",
+  "n_test": 100,
+  "n_defect": 40,
+  "image_auroc": 1.0,
+  "pixel_auroc": 0.9745945006751459,
+  "aupro": 0.9469784352703566,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.15109121799469,
+  "precision_at_threshold": 0.9090909090909091,
+  "recall_at_threshold": 1.0,
+  "false_positive_rate_at_threshold": 0.06666666666666667,
+  "eval_seconds": 22.11,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": 0.0,
+      "pixel_auroc": 0.0005920348018275678,
+      "aupro": 0.0014302665049350516
+    }
+  }
+}

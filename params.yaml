@@ -1,0 +1,54 @@
+# Parameters for the DVC pipeline. Changing a value here makes `dvc repro`
+# re-run only the affected stages.
+
+data:
+  root: data/mvtec_ad
+  # Categories in the pipeline (all 15 MVTec AD categories).
+  categories:
+    - bottle
+    - screw
+    - metal_nut
+    - cable
+    - capsule
+    - carpet
+    - grid
+    - hazelnut
+    - leather
+    - pill
+    - tile
+    - toothbrush
+    - transistor
+    - wood
+    - zipper
+
+preprocess:
+  resize: 256
+  crop: 224
+
+model:
+  backbone: wide_resnet50_2
+  layers: [layer2, layer3]
+  embed_dim: 1024
+  pool_size: 3
+  blur_sigma: 4.0
+
+train:
+  coreset_ratio: 0.1
+  coreset_proj_dim: 128
+  # Fraction of train/good images held out to calibrate the threshold.
+  calib_fraction: 0.1
+  # Threshold = this percentile of anomaly scores on held-out good images.
+  threshold_percentile: 99
+  batch_size: 8
+  seed: 0
+
+evaluate:
+  batch_size: 4
+  pro_fpr_limit: 0.3
+  # Quality gate: ONNX fp32/INT8 may lose at most this much (absolute) vs. PyTorch on
+  # image AUROC, pixel AUROC or AUPRO, otherwise the evaluate stage fails.
+  max_metric_drop: 0.02
+
+benchmark:
+  warmup: 5
+  runs: 50

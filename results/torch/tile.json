@@ -1,0 +1,16 @@
+{
+  "category": "tile",
+  "backend": "torch",
+  "n_test": 117,
+  "n_defect": 84,
+  "image_auroc": 0.9837662337662338,
+  "pixel_auroc": 0.9526174564213169,
+  "aupro": 0.7876043854052178,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.2082066535949707,
+  "precision_at_threshold": 0.9879518072289156,
+  "recall_at_threshold": 0.9761904761904762,
+  "false_positive_rate_at_threshold": 0.030303030303030304,
+  "eval_seconds": 41.49,
+  "pixel_metric_resolution": 224
+}

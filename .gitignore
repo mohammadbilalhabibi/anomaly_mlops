@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+
+# Secrets
+.env
+
+# Dataset (MVTec AD, CC BY-NC-SA 4.0 — never commit) — tracked by DVC
+/data/mvtec_ad/*
+!/data/mvtec_ad/*.dvc
+!/data/mvtec_ad/.gitignore
+*.tar.xz
+
+# Models trained on MVTec (DVC outputs)
+/models/
+
+# MLflow
+mlflow.db
+mlruns/
+mlartifacts/
+
+# Local scratch
+*.log

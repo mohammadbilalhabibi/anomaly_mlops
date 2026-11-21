@@ -1,0 +1,25 @@
+{
+  "category": "zipper",
+  "backend": "fp32",
+  "n_test": 151,
+  "n_defect": 119,
+  "image_auroc": 0.9950105042016807,
+  "pixel_auroc": 0.9827421222342548,
+  "aupro": 0.927865498137781,
+  "pro_fpr_limit": 0.3,
+  "threshold": 0.8661351799964905,
+  "precision_at_threshold": 0.9914529914529915,
+  "recall_at_threshold": 0.9747899159663865,
+  "false_positive_rate_at_threshold": 0.03125,
+  "eval_seconds": 41.45,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": 0.0,
+      "pixel_auroc": -4.105456752334646e-09,
+      "aupro": -6.552816433913478e-08
+    }
+  }
+}

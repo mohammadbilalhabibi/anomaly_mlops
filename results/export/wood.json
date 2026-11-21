@@ -1,0 +1,16 @@
+{
+  "category": "wood",
+  "n_parity_images": 16,
+  "fp32": {
+    "file_mb": 177.3,
+    "max_abs_score_diff": 1.6689300537109375e-06,
+    "max_rel_score_diff": 1.2561272342281882e-06,
+    "max_abs_map_diff": 3.2186508178710938e-06
+  },
+  "int8": {
+    "file_mb": 103.2,
+    "max_abs_score_diff": 0.12872719764709473,
+    "max_rel_score_diff": 0.06485941261053085,
+    "max_abs_map_diff": 0.11436331272125244
+  }
+}

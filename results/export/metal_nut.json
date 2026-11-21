@@ -1,0 +1,16 @@
+{
+  "category": "metal_nut",
+  "n_parity_images": 16,
+  "fp32": {
+    "file_mb": 169.6,
+    "max_abs_score_diff": 1.9073486328125e-06,
+    "max_rel_score_diff": 1.2976263406017097e-06,
+    "max_abs_map_diff": 6.318092346191406e-06
+  },
+  "int8": {
+    "file_mb": 95.5,
+    "max_abs_score_diff": 0.021936655044555664,
+    "max_rel_score_diff": 0.014547298662364483,
+    "max_abs_map_diff": 0.225327730178833
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "category": "carpet",
+  "n_parity_images": 16,
+  "fp32": {
+    "file_mb": 187.0,
+    "max_abs_score_diff": 3.635883331298828e-06,
+    "max_rel_score_diff": 4.610002633853583e-06,
+    "max_abs_map_diff": 4.708766937255859e-06
+  },
+  "int8": {
+    "file_mb": 112.8,
+    "max_abs_score_diff": 0.03068828582763672,
+    "max_rel_score_diff": 0.04019206762313843,
+    "max_abs_map_diff": 0.03402841091156006
+  }
+}

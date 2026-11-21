@@ -1,0 +1,6 @@
+outs:
+- md5: bd60c7dc398b08cd16f6e3b4fdad52e2.dir
+  size: 109503304
+  nfiles: 134
+  hash: md5
+  path: toothbrush

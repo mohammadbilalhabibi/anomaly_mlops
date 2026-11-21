@@ -1,0 +1,32 @@
+{
+  "category": "toothbrush",
+  "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+  "logical_cores": 8,
+  "torch_threads": 8,
+  "torch_version": "2.15.0+cpu",
+  "onnxruntime_version": "1.32.0",
+  "batch_size": 1,
+  "runs": 50,
+  "warmup": 5,
+  "memory_bank_size": 4234,
+  "preprocess": {
+    "median_ms": 30.0,
+    "p95_ms": 34.17,
+    "mean_ms": 30.56
+  },
+  "torch": {
+    "median_ms": 167.2,
+    "p95_ms": 194.05,
+    "mean_ms": 168.75
+  },
+  "onnx_fp32": {
+    "median_ms": 111.53,
+    "p95_ms": 151.3,
+    "mean_ms": 116.58
+  },
+  "onnx_int8": {
+    "median_ms": 70.06,
+    "p95_ms": 81.65,
+    "mean_ms": 69.87
+  }
+}

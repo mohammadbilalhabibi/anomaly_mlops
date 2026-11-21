@@ -1,0 +1,25 @@
+{
+  "category": "tile",
+  "backend": "int8",
+  "n_test": 117,
+  "n_defect": 84,
+  "image_auroc": 0.9841269841269842,
+  "pixel_auroc": 0.9546152571271707,
+  "aupro": 0.7921703228281225,
+  "pro_fpr_limit": 0.3,
+  "threshold": 1.2082066535949707,
+  "precision_at_threshold": 0.9879518072289156,
+  "recall_at_threshold": 0.9761904761904762,
+  "false_positive_rate_at_threshold": 0.030303030303030304,
+  "eval_seconds": 25.63,
+  "pixel_metric_resolution": 224,
+  "quality_gate": {
+    "passed": true,
+    "max_drop": 0.02,
+    "drops": {
+      "image_auroc": -0.0003607503607503393,
+      "pixel_auroc": -0.0019978007058537584,
+      "aupro": -0.004565937422904676
+    }
+  }
+}
