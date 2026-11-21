@@ -1,6 +1,56 @@
 # Measured results
 
-**Headline (15 categories):** mean image AUROC 98.6%, pixel AUROC 97.9%, AUPRO 90.2%. The served INT8 ONNX model keeps image AUROC 98.5% / AUPRO 90.0% and passes the quality gate in 15/15 categories. INT8 inference takes 70–259 ms median per image on a laptop CPU, depending on memory-bank size.
+## Headline
+
+| Mean over 15 MVTec AD categories | PyTorch (reference) | ONNX INT8 (served) |
+|---|---:|---:|
+| Image AUROC (finds the defective part) | 98.6% | 98.5% |
+| Pixel AUROC (finds the defect pixels) | 97.9% | 97.8% |
+| AUPRO (FPR ≤ 0.3, per defect region) | 90.2% | 90.0% |
+| Median CPU latency per image, model only | – | 70–259 ms |
+| Speed vs ONNX fp32 (median latency) | – | 1.30× faster |
+| Model file size vs ONNX fp32 | – | 43% smaller |
+| API end-to-end, bottle (median / p95) | – | 214 / 255 ms |
+
+INT8 passes the quality gate (at most 2 points lost on every metric) in 15/15 categories. Latency: laptop CPU, batch size 1.
+
+## Coreset ablation (speed vs accuracy)
+
+Mean over 4 categories (bottle, carpet, hazelnut, screw), served INT8 model:
+
+| Coreset ratio | Memory bank (mean) | Image AUROC | Pixel AUROC | AUPRO | INT8 median ms | Speed-up vs 10% | NN-search share |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 10% | 21,168 | 98.5 | 98.6 | 90.5 | 246 | 1.00× | 78% |
+| 5% | 10,584 | 98.9 | 98.5 | 90.5 | 166 | 1.51× | 65% |
+| 1% | 2,117 | 98.4 | 98.2 | 89.0 | 72 | 3.41× | 28% |
+
+<details><summary>Per category and ratio</summary>
+
+| Category | Coreset | Memory bank | Image AUROC | Pixel AUROC | AUPRO | Precision | Recall | FPR | INT8 MB | INT8 median / p95 ms | NN-search share |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| bottle | 10% | 14,740 | 100.0 | 98.2 | 91.8 | 98.4 | 100.0 | 5.0 | 92.2 | 205 / 268 | 71% |
+| bottle | 5% | 7,370 | 100.0 | 98.2 | 91.6 | 98.4 | 100.0 | 5.0 | 62.0 | 114 / 129 | 57% |
+| bottle | 1% | 1,474 | 100.0 | 98.2 | 91.5 | 95.5 | 100.0 | 15.0 | 37.9 | 67 / 94 | 22% |
+| carpet | 10% | 19,757 | 99.0 | 98.8 | 92.0 | 89.8 | 98.9 | 35.7 | 112.8 | 203 / 384 | 79% |
+| carpet | 5% | 9,879 | 99.0 | 98.8 | 91.8 | 89.8 | 98.9 | 35.7 | 72.3 | 155 / 204 | 64% |
+| carpet | 1% | 1,976 | 99.0 | 98.8 | 91.3 | 89.8 | 98.9 | 35.7 | 39.9 | 68 / 104 | 27% |
+| hazelnut | 10% | 27,597 | 100.0 | 98.4 | 86.2 | 100.0 | 100.0 | 0.0 | 145.0 | 321 / 528 | 83% |
+| hazelnut | 5% | 13,799 | 100.0 | 98.5 | 86.8 | 100.0 | 100.0 | 0.0 | 88.4 | 208 / 264 | 71% |
+| hazelnut | 1% | 2,760 | 100.0 | 98.5 | 88.3 | 100.0 | 98.6 | 0.0 | 43.1 | 83 / 110 | 33% |
+| screw | 10% | 22,580 | 95.1 | 98.7 | 92.0 | 98.6 | 57.1 | 2.4 | 124.4 | 255 / 595 | 78% |
+| screw | 5% | 11,290 | 96.5 | 98.7 | 91.6 | 98.7 | 63.0 | 2.4 | 78.1 | 185 / 235 | 66% |
+| screw | 1% | 2,258 | 94.7 | 97.4 | 85.0 | 97.8 | 73.9 | 4.9 | 41.1 | 69 / 107 | 30% |
+
+</details>
+
+Latency: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz, batch size 1, 50 runs after 5 warm-up runs; all ratios were timed in the same session (the 10% rows reuse the main models and re-time them). Precision, recall and FPR use a threshold recalibrated for each ratio. NN-search share = share of ONNX Runtime kernel time spent comparing patches with the memory bank.
+Reproducibility check: 8/8 retrained memory banks are exactly the first rows of the 10% bank (greedy coreset selection is nested).
+
+## Threshold study
+
+_Not run yet. Run `python scripts/threshold_study.py`._
+
+## Per-category results
 
 ### Detection and localisation (MVTec AD test set, %)
 

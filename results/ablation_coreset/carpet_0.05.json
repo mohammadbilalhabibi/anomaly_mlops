@@ -1,0 +1,40 @@
+{
+  "category": "carpet",
+  "coreset_ratio": 0.05,
+  "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+  "logical_cores": 8,
+  "batch_size": 1,
+  "runs": 50,
+  "warmup": 5,
+  "source": "this ablation (retrained memory bank, same seed and split)",
+  "memory_bank_size": 9879,
+  "n_patches": 197568,
+  "coreset_seconds": 75.7,
+  "bank_equals_prefix_of_default_bank": true,
+  "max_abs_diff_to_default_bank_prefix": 0.0,
+  "threshold": 0.9268935322761536,
+  "int8": {
+    "image_auroc": 0.9895666131621186,
+    "pixel_auroc": 0.9881455873688538,
+    "aupro": 0.9184068141066426,
+    "precision_at_threshold": 0.8979591836734694,
+    "recall_at_threshold": 0.9887640449438202,
+    "false_positive_rate_at_threshold": 0.35714285714285715
+  },
+  "int8_file_mb": 72.3,
+  "int8_latency": {
+    "median_ms": 154.8,
+    "p95_ms": 203.64,
+    "mean_ms": 161.86
+  },
+  "profile": {
+    "backbone_ms": 50.23,
+    "nn_search_ms": 93.63,
+    "postprocess_ms": 1.49,
+    "backbone_share": 0.3456,
+    "nn_search_share": 0.6442,
+    "postprocess_share": 0.0103,
+    "profiled_runs": 17
+  },
+  "embedding_seconds": 68.14
+}

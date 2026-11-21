@@ -13,11 +13,11 @@ from anomaly.config import PROJECT_ROOT
 EXPERIMENT = "patchcore-mvtec"
 
 
-def setup() -> None:
+def setup(experiment: str = EXPERIMENT) -> None:
     """Point MLflow at the tracking URI from the environment (default: local sqlite)."""
     default = f"sqlite:///{(PROJECT_ROOT / 'mlflow.db').as_posix()}"
     mlflow.set_tracking_uri(os.environ.get("MLFLOW_TRACKING_URI", default))
-    mlflow.set_experiment(EXPERIMENT)
+    mlflow.set_experiment(experiment)
 
 
 def git_commit() -> str:

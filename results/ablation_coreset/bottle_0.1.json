@@ -1,0 +1,35 @@
+{
+  "category": "bottle",
+  "coreset_ratio": 0.1,
+  "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+  "logical_cores": 8,
+  "batch_size": 1,
+  "runs": 50,
+  "warmup": 5,
+  "source": "main pipeline (models/<category>, results/int8), not retrained",
+  "memory_bank_size": 14740,
+  "threshold": 0.9502646923065186,
+  "int8": {
+    "image_auroc": 1.0,
+    "pixel_auroc": 0.9822190796348449,
+    "aupro": 0.9183612132165707,
+    "precision_at_threshold": 0.984375,
+    "recall_at_threshold": 1.0,
+    "false_positive_rate_at_threshold": 0.05
+  },
+  "int8_file_mb": 92.2,
+  "int8_latency": {
+    "median_ms": 205.4,
+    "p95_ms": 267.55,
+    "mean_ms": 211.2
+  },
+  "profile": {
+    "backbone_ms": 69.62,
+    "nn_search_ms": 171.16,
+    "postprocess_ms": 0.97,
+    "backbone_share": 0.288,
+    "nn_search_share": 0.708,
+    "postprocess_share": 0.004,
+    "profiled_runs": 17
+  }
+}
