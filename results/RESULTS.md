@@ -48,7 +48,49 @@ Reproducibility check: 8/8 retrained memory banks are exactly the first rows of 
 
 ## Threshold study
 
-_Not run yet. Run `python scripts/threshold_study.py`._
+Mean over 15 categories, served INT8 models (%):
+
+| Threshold rule | Uses defect labels? | Precision | Recall | FPR | F1 |
+|---|:---:|---:|---:|---:|---:|
+| Served (p99, calibrated in PyTorch) | no | 96.0 | 90.8 | 11.0 | 92.4 |
+| p99 | no | 96.6 | 91.6 | 10.8 | 93.2 |
+| max | no | 96.7 | 89.6 | 10.2 | 91.8 |
+| p95 | no | 93.4 | 95.8 | 19.6 | 94.3 |
+| mean + 3·std | no | 97.6 | 89.5 | 7.6 | 92.5 |
+| *Reference:* best F1 on 5 good + 5 defective test images (20 splits) | **yes** | 98.4 | 92.8 | 5.8 | 95.4 |
+| *Reference:* oracle, best F1 on the full test set | **yes** | 97.9 | 98.1 | 7.1 | 98.0 |
+
+Rows marked *Reference* use test labels and are not used by the served model.
+
+<details><summary>Per category: served threshold, best possible threshold and good-score shift</summary>
+
+| Category | Calib. images | Served recall | Served FPR | Best recall at FPR ≤ 5% (labels) | Oracle F1 (labels) | Few-label F1 (labels) | Good-score median, test / calib. | KS p-value |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| bottle | 21 | 100.0 | 5.0 | 100.0 | 100.0 | 98.3 ± 1.4 | 0.99× | 0.71 |
+| screw | 32 | 57.1 | 2.4 | 87.4 | 94.0 | 90.2 ± 4.3 | 1.03× | 0.23 |
+| metal_nut | 22 | 100.0 | 9.1 | 96.8 | 98.9 | 96.8 ± 1.5 | 1.01× | 0.87 |
+| cable | 22 | 95.7 | 3.4 | 98.9 | 98.4 | 95.0 ± 3.7 | 0.96× | 0.15 |
+| capsule | 22 | 64.2 | 4.3 | 69.7 | 97.2 | 91.3 ± 7.5 | 1.03× | 0.12 |
+| carpet | 28 | 98.9 | 35.7 | 94.4 | 97.8 | 95.3 ± 1.9 | 1.03× | 0.056 |
+| grid | 26 | 94.7 | 4.8 | 96.5 | 97.3 | 93.8 ± 3.1 | 1.02× | 0.52 |
+| hazelnut | 39 | 100.0 | 0.0 | 100.0 | 100.0 | 98.8 ± 1.3 | 0.98× | 0.12 |
+| leather | 24 | 100.0 | 15.6 | 100.0 | 100.0 | 98.8 ± 1.6 | 1.10× | 1.1e-06 |
+| pill | 27 | 58.9 | 0.0 | 85.1 | 94.6 | 91.8 ± 4.1 | 0.98× | 0.31 |
+| tile | 23 | 97.6 | 3.0 | 97.6 | 98.2 | 96.4 ± 3.1 | 0.99× | 0.13 |
+| toothbrush | 6 | 96.7 | 25.0 | 93.3 | 96.7 | 95.1 ± 1.6 | 1.00× | 0.96 |
+| transistor | 21 | 100.0 | 6.7 | 100.0 | 100.0 | 98.3 ± 1.5 | 1.02× | 0.053 |
+| wood | 25 | 100.0 | 47.4 | 95.0 | 97.5 | 95.0 ± 1.2 | 1.12× | 0.0038 |
+| zipper | 24 | 97.5 | 3.1 | 99.2 | 99.2 | 95.5 ± 3.8 | 1.03× | 0.36 |
+
+</details>
+
+Recall per defect type at the served threshold (%), lowest first:
+
+| Category | Defect types: recall (n) |
+|---|---|
+| screw | thread_side 26.1 (23), scratch_head 41.7 (24), manipulated_front 54.2 (24), thread_top 69.6 (23), scratch_neck 92.0 (25) |
+| pill | crack 30.8 (26), faulty_imprint 42.1 (19), color 56.0 (25), contamination 66.7 (21), scratch 66.7 (24), combined 82.4 (17), pill_type 100.0 (9) |
+| capsule | scratch 43.5 (23), faulty_imprint 45.5 (22), poke 57.1 (21), crack 78.3 (23), squeeze 100.0 (20) |
 
 ## Per-category results
 
