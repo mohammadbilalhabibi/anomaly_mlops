@@ -1,5 +1,7 @@
 # anomaly_mlops — label-free visual inspection with an MLOps pipeline
 
+[![CI](https://github.com/mohammadbilalhabibi/anomaly_mlops/actions/workflows/ci.yml/badge.svg)](https://github.com/mohammadbilalhabibi/anomaly_mlops/actions/workflows/ci.yml)
+
 **Finds and localises defects on industrial parts without ever seeing a defect during training.**
 PatchCore learns what *good* bottles, screws and metal nuts look like from defect-free
 images only, then flags anything that deviates and draws a heatmap of where. The model is
