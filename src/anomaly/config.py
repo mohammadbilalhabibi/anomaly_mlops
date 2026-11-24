@@ -104,3 +104,7 @@ class ServeSettings(BaseSettings):
     samples_dir: Path = PROJECT_ROOT / "data" / "mvtec_ad"
     ort_threads: int = 0
     samples_per_category: int = 6
+    # Deployment: private Hugging Face model repo with models/ and samples/. When set, the app
+    # downloads it into `assets_dir` at startup and serves from there (token: HF_TOKEN env var).
+    hf_assets_repo: str = ""
+    assets_dir: Path = PROJECT_ROOT / "assets"

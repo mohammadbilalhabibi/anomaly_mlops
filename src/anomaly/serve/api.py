@@ -23,6 +23,7 @@ from anomaly.data import IMAGE_SUFFIXES
 from anomaly.heatmap import colorize, normalize_map, overlay, to_png_base64
 from anomaly.onnx_infer import OnnxAnomalyModel, discover_models
 from anomaly.preprocess import display_image, open_image, preprocess_image
+from anomaly.serve.assets import fetch_assets
 
 STATIC_DIR = Path(__file__).parent / "static"
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024
@@ -96,11 +97,14 @@ def create_app(settings: ServeSettings | None = None) -> FastAPI:
 
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-        app.state.models = discover_models(
-            settings.models_dir, settings.model_variant, settings.ort_threads
-        )
+        models_dir, samples_dir = settings.models_dir, settings.samples_dir
+        if settings.hf_assets_repo:
+            models_dir, samples_dir = fetch_assets(
+                settings.hf_assets_repo, settings.model_variant, settings.assets_dir
+            )
+        app.state.models = discover_models(models_dir, settings.model_variant, settings.ort_threads)
         app.state.samples = index_samples(
-            settings.samples_dir, list(app.state.models), settings.samples_per_category
+            samples_dir, list(app.state.models), settings.samples_per_category
         )
         yield
 

@@ -1,0 +1,67 @@
+# Azure Container Apps definition for the anomaly_mlops demo (applied by scripts/deploy_azure.ps1).
+# Placeholders __LIKE_THIS__ are filled in by the script. The real HF_TOKEN is never in this
+# file: the app is created with a placeholder secret and the script then sets the real value
+# with `az containerapp secret set` (read from .env, never printed).
+location: __LOCATION__
+properties:
+  managedEnvironmentId: __ENVIRONMENT_ID__
+  configuration:
+    activeRevisionsMode: Single
+    ingress:
+      external: true
+      targetPort: 8000
+      transport: auto
+      allowInsecure: false
+    secrets:
+      - name: hf-token
+        value: placeholder-replaced-by-deploy-script
+  template:
+    containers:
+      - name: anomaly
+        image: __IMAGE__
+        resources:
+          cpu: __CPU__
+          memory: __MEMORY__
+        env:
+          # Read-only token for the private Hugging Face repo with the models and samples.
+          - name: HF_TOKEN
+            secretRef: hf-token
+          - name: HF_ASSETS_REPO
+            value: __HF_ASSETS_REPO__
+          - name: MODEL_VARIANT
+            value: int8
+          - name: ORT_THREADS
+            value: "__ORT_THREADS__"
+        probes:
+          # Startup downloads ~1.6 GB of models and samples, then loads 15 ONNX models: allow
+          # up to 10 minutes (5 s x 120 attempts) so Azure never restarts a starting replica.
+          - type: Startup
+            httpGet:
+              path: /api/health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 120
+          - type: Readiness
+            httpGet:
+              path: /api/health
+              port: 8000
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          - type: Liveness
+            httpGet:
+              path: /api/health
+              port: 8000
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+    scale:
+      minReplicas: 0
+      maxReplicas: 1
+      rules:
+        - name: http-requests
+          http:
+            metadata:
+              concurrentRequests: "10"

@@ -79,3 +79,62 @@ def test_app_starts_without_models(tmp_path: Path) -> None:
 def test_index_samples_cycles_defect_types(fake_mvtec: Path) -> None:
     found = index_samples(fake_mvtec, ["widget"], 3)
     assert [s.defect_type for s in found.values()] == ["good", "scratch", "good"]
+
+
+def test_assets_downloaded_from_hf_repo_at_startup(
+    models_dir: Path, fake_mvtec: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    calls = []
+
+    def fake_fetch(repo_id: str, variant: str, dest: Path) -> tuple[Path, Path]:
+        calls.append((repo_id, variant, dest))
+        return models_dir, fake_mvtec
+
+    monkeypatch.setattr("anomaly.serve.api.fetch_assets", fake_fetch)
+    settings = ServeSettings(
+        models_dir=tmp_path / "missing",
+        samples_dir=tmp_path / "missing",
+        hf_assets_repo="someone/assets",
+        assets_dir=tmp_path / "assets",
+    )
+    with TestClient(create_app(settings)) as c:
+        assert c.get("/api/health").json()["categories"] == ["widget"]
+        assert len(c.get("/api/samples").json()) == 6
+    assert calls == [("someone/assets", "int8", tmp_path / "assets")]
+
+
+def test_fetch_assets_requests_only_one_variant(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import sys
+    import types
+
+    from anomaly.serve.assets import fetch_assets
+
+    seen = {}
+    fake_hub = types.ModuleType("huggingface_hub")
+    fake_hub.snapshot_download = lambda **kw: seen.update(kw)  # type: ignore[attr-defined]
+    monkeypatch.setitem(sys.modules, "huggingface_hub", fake_hub)
+    models, samples = fetch_assets("someone/assets", "int8", tmp_path)
+    assert (models, samples) == (tmp_path / "models", tmp_path / "samples")
+    assert seen["repo_id"] == "someone/assets" and seen["local_dir"] == tmp_path
+    assert "models/*/model_int8.onnx" in seen["allow_patterns"]
+    assert not any("fp32" in p for p in seen["allow_patterns"])
+
+
+def test_stage_assets_uses_repo_layout(models_dir: Path, fake_mvtec: Path, tmp_path: Path) -> None:
+    import importlib.util
+
+    root = Path(__file__).resolve().parents[1]
+    spec = importlib.util.spec_from_file_location(
+        "upload_assets_hf", root / "scripts" / "upload_assets_hf.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)  # type: ignore[union-attr]
+    counts = module.stage_assets(models_dir, fake_mvtec, "int8", 4, tmp_path)
+    assert counts == {"categories": 1, "samples": 4}
+    assert (tmp_path / "models/widget/model_int8.onnx").is_file()
+    assert (tmp_path / "models/widget/meta.json").is_file()
+    assert not (tmp_path / "models/widget/model_fp32.onnx").exists()
+    assert len(list((tmp_path / "samples/widget/test").rglob("*.png"))) == 4
+    assert "cc-by-nc-sa-4.0" in (tmp_path / "README.md").read_text(encoding="utf-8")

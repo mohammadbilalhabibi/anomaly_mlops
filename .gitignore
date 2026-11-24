@@ -27,3 +27,6 @@ mlartifacts/
 
 # Local scratch
 *.log
+
+# Deployment assets downloaded at startup (models + samples, never commit)
+/assets/

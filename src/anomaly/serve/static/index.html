@@ -21,6 +21,8 @@
   main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
   h1 { font-size: 22px; margin: 0 0 4px; }
   .sub { color: var(--muted); margin: 0 0 20px; }
+  .credit { color: var(--muted); font-size: 13px; margin: 20px 0 0; }
+  .credit a { color: inherit; }
   .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
            padding: 16px; margin-bottom: 16px; }
   .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
@@ -99,6 +101,12 @@
       </figure>
     </div>
   </section>
+  <p class="credit">Sample images and training data:
+    <a href="https://www.mvtec.com/company/research/datasets/mvtec-ad" target="_blank" rel="noopener">MVTec AD</a>
+    (MVTec Software GmbH), licensed
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.
+    Non-commercial demo. Code on
+    <a href="https://github.com/mohammadbilalhabibi/anomaly_mlops" target="_blank" rel="noopener">GitHub</a>.</p>
 </main>
 <script>
 const $ = (id) => document.getElementById(id);

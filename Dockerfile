@@ -1,21 +1,25 @@
 # Serving image: FastAPI + ONNX Runtime only (no torch, no training deps).
-# Models are trained on MVTec AD (CC BY-NC-SA 4.0) and are NOT baked into the
-# image; mount them at runtime:
-#   docker run -p 8000:8000 -v ./models:/app/models anomaly-mlops
+# Models are trained on MVTec AD (CC BY-NC-SA 4.0) and are NOT baked into the image, so the
+# image can be public. Two ways to provide them at runtime:
+#   1. Mount them:   docker run -p 8000:8000 -v ./models:/app/models anomaly-mlops
+#   2. Deployment:   set HF_ASSETS_REPO (private Hugging Face repo with models/ and samples/)
+#                    and HF_TOKEN (read-only); they are downloaded once at startup.
 FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
+    HF_HUB_DISABLE_TELEMETRY=1 \
     MODELS_DIR=/app/models \
     SAMPLES_DIR=/app/data/mvtec_ad \
+    ASSETS_DIR=/app/assets \
     PORT=8000
 
 WORKDIR /app
 COPY pyproject.toml README.md ./
 COPY src ./src
-RUN pip install . && useradd --create-home appuser && mkdir -p /app/models /app/data \
-    && chown -R appuser /app
+RUN pip install ".[deploy]" && useradd --create-home appuser \
+    && mkdir -p /app/models /app/data /app/assets && chown -R appuser /app
 USER appuser
 
 EXPOSE 8000

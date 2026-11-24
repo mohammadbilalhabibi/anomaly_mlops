@@ -35,6 +35,10 @@ mlops = [
     "mlflow>=2.14",
     "dvc>=3.50",
 ]
+# Deployed container: downloads models and samples from a private Hugging Face repo.
+deploy = [
+    "huggingface_hub>=0.24",
+]
 # Recording the README demo GIF (uses the installed Microsoft Edge; not needed in CI).
 demo = [
     "playwright>=1.45",
