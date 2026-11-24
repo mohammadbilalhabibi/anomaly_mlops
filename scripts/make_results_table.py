@@ -399,12 +399,38 @@ def build() -> str:
     return "\n\n".join(p for p in parts if p) + "\n"
 
 
+def deploy_block() -> str:
+    """Measured latency and cold start of the deployed app (results/latency_azure.json)."""
+    path = RESULTS / "latency_azure.json"
+    if not path.is_file():
+        return "_Not measured yet: run `scripts/benchmark_api.py --out latency_azure.json`._"
+    a = json.loads(path.read_text(encoding="utf-8"))
+    lines = [
+        f"| Live app ({a['category']}, ONNX {a['variant']}, {a['runs']} requests) | median | p95 |",
+        "|---|---:|---:|",
+        f"| Model only (on the server) | {a['inference_median_ms']:.0f} ms | – |",
+        f"| Server total: decode, model, heatmap PNGs | {a['server_median_ms']:.0f} ms "
+        f"| {a['server_p95_ms']:.0f} ms |",
+        f"| Round trip from a laptop in Deggendorf (incl. upload) | {a['median_ms']:.0f} ms "
+        f"| {a['p95_ms']:.0f} ms |",
+    ]
+    if "cold_start_s" in a:
+        lines += [
+            "",
+            f"First request after the app has scaled to zero: **{a['cold_start_s']:.0f} s** "
+            "(start a replica, pull the image, download 1.5 GB of models and samples, load 15 "
+            "models). Every request after that is fast.",
+        ]
+    return "\n".join(lines)
+
+
 def blocks() -> dict[str, str]:
     """All generated README blocks, keyed by marker name."""
     return {
         "HEADLINE": headline_table() + "\n",
         "CORESET": coreset_block() + "\n",
         "THRESHOLD": threshold_block() + "\n",
+        "DEPLOY": deploy_block() + "\n",
         "RESULTS": build(),
     }
 
@@ -427,6 +453,7 @@ def main() -> None:
         "HEADLINE": "Headline",
         "CORESET": "Coreset ablation (speed vs accuracy)",
         "THRESHOLD": "Threshold study",
+        "DEPLOY": "Live deployment (Azure Container Apps)",
         "RESULTS": "Per-category results",
     }
     md = "# Measured results\n\n" + "\n".join(f"## {titles[k]}\n\n{v}" for k, v in gen.items())

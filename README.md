@@ -5,7 +5,11 @@
 **A visual inspection model that learns only from photos of good parts.** It finds defects it
 has never seen and shows where they are with a heatmap. Trained and measured on all 15 product
 types of the MVTec AD benchmark, served as an INT8 ONNX model behind FastAPI on a laptop CPU,
-with a DVC pipeline, MLflow tracking and GitHub Actions CI.
+with a DVC pipeline, MLflow tracking and GitHub Actions CI, and deployed on Azure.
+
+**[Try the live demo](https://anomaly-inspector.orangebay-5ef51369.francecentral.azurecontainerapps.io)**: pick a
+product, click a sample, see the score and heatmap. The app scales to zero when nobody uses it,
+so the first visit after a quiet period has to wake it up ([measured below](#deployment)).
 
 ![Demo: a broken bottle is flagged with a heatmap, a good bottle passes, a hole in carpet is flagged](docs/demo.gif)
 
@@ -220,7 +224,45 @@ held-out good images.
   command each and write to their own `results/` folders, so they never change the main results.
 - **CI (`.github/workflows/ci.yml`):** ruff lint + format check, pytest on synthetic images with a
   tiny random backbone (no dataset or weight downloads), Docker build with a `/api/health` smoke
-  test and a check that the serving image contains no torch.
+  test and checks that the serving image contains no torch and no models or dataset images. On
+  pushes to `main` the image is published to `ghcr.io/mohammadbilalhabibi/anomaly_mlops`.
+
+## Deployment
+
+The [live demo](https://anomaly-inspector.orangebay-5ef51369.francecentral.azurecontainerapps.io)
+runs on **Azure Container Apps** (Consumption plan, 1.5 vCPU / 3 GiB, scale 0–1 replicas).
+
+```mermaid
+flowchart LR
+  gh[GitHub Actions] -->|"public image: code only"| ghcr[ghcr.io]
+  ghcr --> aca[Azure Container Apps]
+  hf[("private Hugging Face repo:<br/>15 INT8 models + 90 samples")] -->|"download at startup<br/>(read-only token)"| aca
+  user[Browser] -->|HTTPS| aca
+```
+
+- **No dataset-derived files in public.** Models trained on MVTec AD and its images are
+  CC BY-NC-SA. The Docker image contains only code (CI checks this), so it can be public. The
+  models and sample images sit in a private Hugging Face repo, and the app downloads them once at
+  startup with a read-only token stored as an Azure secret.
+- **Scale to zero.** No traffic means no replica and almost no cost. The price is a cold start
+  for the first visitor. A $10/month budget alert covers the resource group.
+- **Deploy:** `python scripts/upload_assets_hf.py --repo <user>/anomaly-mlops-assets` (once, and
+  after retraining), put `HF_TOKEN=<read-only token>` in `.env`, then
+  `powershell -ExecutionPolicy Bypass -File scripts\deploy_azure.ps1` after `az login`.
+
+<!-- DEPLOY:START -->
+| Live app (bottle, ONNX int8, 50 requests) | median | p95 |
+|---|---:|---:|
+| Model only (on the server) | 128 ms | – |
+| Server total: decode, model, heatmap PNGs | 192 ms | 197 ms |
+| Round trip from a laptop in Deggendorf (incl. upload) | 407 ms | 509 ms |
+
+First request after the app has scaled to zero: **22 s** (start a replica, pull the image, download 1.5 GB of models and samples, load 15 models). Every request after that is fast.
+<!-- DEPLOY:END -->
+
+Measured with `scripts/benchmark_api.py --url <app url> --out latency_azure.json --cold-start`.
+The round trip includes uploading a 0.5 MB PNG over a home connection, so it depends on the
+visitor's network; the server times do not.
 
 ## Run locally
 
@@ -270,7 +312,9 @@ docker run -p 8000:8000 -v ${PWD}/models:/app/models anomaly-mlops
 | `POST /api/predict` | Form fields `category`, `file` → score, threshold, decision, latency, base64 PNG crop / overlay / heatmap |
 
 Settings come from environment variables or `.env` (see `.env.example`): `MODELS_DIR`,
-`MODEL_VARIANT` (`int8`, the default, or `fp32`), `SAMPLES_DIR`, `ORT_THREADS`.
+`MODEL_VARIANT` (`int8`, the default, or `fp32`), `SAMPLES_DIR`, `ORT_THREADS`, and for the
+deployment `HF_ASSETS_REPO` (download models and samples from that private repo at startup; the
+token comes from `HF_TOKEN`).
 
 ## Full results per category
 
@@ -398,7 +442,10 @@ Pixel AUROC / AUPRO (%) on the test set for three ONNX variants:
 - **Coreset ablation:** 4 of 15 categories, chosen for the largest memory banks plus bottle.
 - **Benchmark vs. production:** MVTec AD images are well lit and aligned. A real line would need
   its own good-part images, monitoring of score drift, and periodic re-fitting of the memory bank.
-- **Licence:** models trained on MVTec AD are for non-commercial use and are not published.
+- **Licence:** models trained on MVTec AD are for non-commercial use and are not published; the
+  live demo downloads them from a private repo and serves them only through the dashboard.
+- **Live demo:** one replica of 1.5 vCPU, so concurrent visitors queue, and a cold start after
+  idle (see [Deployment](#deployment)).
 
 ## What I would do next
 

@@ -1,0 +1,12 @@
+{
+  "url": "https://anomaly-inspector.orangebay-5ef51369.francecentral.azurecontainerapps.io",
+  "category": "bottle",
+  "variant": "int8",
+  "runs": 50,
+  "median_ms": 406.78,
+  "p95_ms": 508.61,
+  "server_median_ms": 191.88,
+  "server_p95_ms": 196.89,
+  "inference_median_ms": 127.76,
+  "cold_start_s": 22.3
+}

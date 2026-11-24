@@ -87,3 +87,17 @@ def test_demo_gif_merges_identical_frames(tmp_path: Path) -> None:
     size = m.to_gif(frames, tmp_path / "demo.gif", width=20)
     gif = Image.open(tmp_path / "demo.gif")
     assert size > 0 and gif.size == (20, 15) and gif.n_frames == 2
+
+
+def test_deploy_block_from_measured_json(report_module, tmp_path: Path) -> None:
+    assert "Not measured yet" in report_module.deploy_block()
+    measured = {
+        "category": "bottle", "variant": "int8", "runs": 50, "median_ms": 363.0, "p95_ms": 377.4,
+        "server_median_ms": 193.2, "server_p95_ms": 206.4, "inference_median_ms": 128.4,
+    }  # fmt: skip
+    (tmp_path / "latency_azure.json").write_text(json.dumps(measured))
+    block = report_module.deploy_block()
+    assert "| Server total: decode, model, heatmap PNGs | 193 ms | 206 ms |" in block
+    assert "scaled to zero" not in block
+    (tmp_path / "latency_azure.json").write_text(json.dumps({**measured, "cold_start_s": 41.6}))
+    assert "**42 s**" in report_module.deploy_block()

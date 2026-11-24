@@ -92,6 +92,16 @@ Recall per defect type at the served threshold (%), lowest first:
 | pill | crack 30.8 (26), faulty_imprint 42.1 (19), color 56.0 (25), contamination 66.7 (21), scratch 66.7 (24), combined 82.4 (17), pill_type 100.0 (9) |
 | capsule | scratch 43.5 (23), faulty_imprint 45.5 (22), poke 57.1 (21), crack 78.3 (23), squeeze 100.0 (20) |
 
+## Live deployment (Azure Container Apps)
+
+| Live app (bottle, ONNX int8, 50 requests) | median | p95 |
+|---|---:|---:|
+| Model only (on the server) | 128 ms | – |
+| Server total: decode, model, heatmap PNGs | 192 ms | 197 ms |
+| Round trip from a laptop in Deggendorf (incl. upload) | 407 ms | 509 ms |
+
+First request after the app has scaled to zero: **22 s** (start a replica, pull the image, download 1.5 GB of models and samples, load 15 models). Every request after that is fast.
+
 ## Per-category results
 
 ### Detection and localisation (MVTec AD test set, %)
